@@ -1,0 +1,2 @@
+fun sqaurex = x*x;
+

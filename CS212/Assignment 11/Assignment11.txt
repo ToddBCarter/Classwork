@@ -1,0 +1,83 @@
+#
+# CS212
+# Assignment 
+# Todd Carter
+# cart7982@vandals.uidaho.edu
+# 4-23-2024
+#
+
+#
+# This is a simple program that takes user input and searches
+# through a .csv file to return requested values or to return
+# a count of entries within a key.
+#
+
+import numpy as np
+import pandas as pd
+
+#Create a panda frame:
+#(This works using IDLE provided the .csv file is
+# in the same directory as the .py file.)
+df1 = pd.read_csv('villagers.csv')
+
+def find(df):
+    key = ""
+    value = ""
+    return_value = ""
+    data = []
+    
+    print(df.columns)
+    while key not in df.columns:
+        key = input("Which key?\n")  #ex color 1
+
+    lst = [x for x in df[key]]
+    while value not in lst:
+        value = input("What value?\n") #ex blue
+        
+    while return_value not in df.columns:
+        return_value = input("What return value?\n") #ex species
+
+    for i in range(0, len(df1)):
+        if df.at[i, key] == value:
+            data.append(df.at[i, return_value])
+    return data            
+
+
+def count(df):
+    key = ""
+    value = ""
+    return_value = 0
+    
+    print(df.columns)
+    while key not in df.columns:
+        key = input("Which key?\n")  #ex color 1
+
+    lst = [x for x in df[key]]
+    while value not in lst:
+        value = input("What value?\n") #ex blue
+    
+    if key in df.columns:
+        for i in range(0, len(df1)):
+            if df.at[i, key] == value:
+                return_value += 1
+    return return_value
+
+
+output = []
+sele = 0
+while sele == 0:
+    print("\nWhat would you like to do?")
+    print("Enter a number and press enter.")
+    sele = input("1. Find\n2. Count\n3. Exit\n")
+    print(sele)
+    if sele == "1" or sele == "Find" or sele == "find":
+        output = find(df1)
+        print(output)
+        sele = 0
+    elif sele == "2" or sele == "Count" or sele == "count":
+        output = count(df1)
+        print(output)
+        sele = 0
+    elif sele == "3" or sele == "Exit" or sele == "exit":
+        print("Goodbye!")
+

@@ -1,0 +1,12 @@
+CC = gcc 
+CFLAGS = 
+
+OBJECTS = os0main.o os0.o hardware0.o 
+
+os0run : $(OBJECTS)
+	$(CC) $(CFLAGS) $(OBJECTS) -lm -o os0run
+
+$(OBJECTS) : os0main.h hardware0.h
+
+clean :
+	/bin/rm -f $(OBJECTS) os0run core 

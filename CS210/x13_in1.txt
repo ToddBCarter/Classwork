@@ -1,0 +1,27 @@
+G = berta
+GC = mia
+
+G = berta
+GC = olga
+
+G = berta
+GC = wera
+
+G = berta
+GC = rene
+
+G = berta
+GC = vico
+
+G = dora
+GC = wera
+
+G = dora
+GC = rene
+
+G = dora
+GC = vico
+
+G = dora
+GC = susan
+

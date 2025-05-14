@@ -1,0 +1,82 @@
+#
+# CS212
+# Assignment 
+# Todd Carter
+# cart7982@vandals.uidaho.edu
+# 4-16-2024
+#
+
+#
+# This is a simple program using numpy and mathplotlib
+# that generates several sets of random data with given
+# means and standard deviations and plots them on a graph.
+#
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Function to normalize length of bincount lists.
+# - data_count is a list of all random numbers from all lists.
+#
+def adjust_list(data, data_count):
+    count = data
+    if max(data_count) > len(data):
+        mod = max(data_count) - (len(count) - 1)
+        count = np.pad(count, (0,mod), mode='constant', constant_values=0)
+    count = count[min(data_count):]
+    return count
+
+# Set parameters:
+mean1, std1 = 100, 5
+mean2, std2 = 100, 10
+mean3, std3 = 100, 15
+mean4, std4 = 110, 10
+samples = 100000
+
+# Generate data sets:
+data1 = np.random.normal(mean1, std1, samples)
+data2 = np.random.normal(mean2, std2, samples)
+data3 = np.random.normal(mean3, std3, samples)
+data4 = np.random.normal(mean4, std4, samples)
+
+# Turn data sets into integers:
+data1 = [int(x) for x in data1]
+data2 = [int(x) for x in data2]
+data3 = [int(x) for x in data3]
+data4 = [int(x) for x in data4]
+
+# Create a list of all data, then remove all duplicates
+# to produce a list that contains the largest and
+# smallest values across all data:
+all_data = np.concatenate([data2, data2, data3, data4])
+data_count = set(all_data)
+data_count = list(data_count)
+
+# Count instances of different integers per set:
+count1 = np.bincount(data1)
+count2 = np.bincount(data2)
+count3 = np.bincount(data3)
+count4 = np.bincount(data4)
+
+# Adjust lists of integer counts by length for graphing,
+# using the largest and smallest values from across all data:
+count1 = adjust_list(count1, data_count)
+count2 = adjust_list(count2, data_count)
+count3 = adjust_list(count3, data_count)
+count4 = adjust_list(count4, data_count)
+
+# Set a reference line for x on the graph:
+ref = [x for x in range(min(data_count), max(data_count)+1)]
+
+# Plot the lines:
+plt.plot(ref, count1, label='Mean=100, Std=5')
+plt.plot(ref, count2, label='Mean=100, Std=10')
+plt.plot(ref, count3, label='Mean=100, Std=15')
+plt.plot(ref, count4, label='Mean=110, Std=10')
+
+plt.title('Distribution of Values over '+str(samples)+' Samples')
+plt.xlabel('Value')
+plt.ylabel('Count')
+plt.legend()
+plt.grid(True)
+plt.show()

@@ -1,0 +1,5 @@
+I've written a very simple example of 3D graphics with a 3D -> 2D
+conversion function. You may want to include in your examples.
+
+-- Gustavo Niemeyer
+

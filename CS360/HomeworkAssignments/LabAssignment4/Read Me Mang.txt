@@ -1,0 +1,13 @@
+{{-- TO RUN THIS SITE:
+    Start a Laravel server by opening command prompt IN ADMIN MODE,
+    navigating to the project folder (sis), and running 
+
+    php artisan serve
+
+    while also running XAMPP with mySQL and apache to access the database.
+
+
+    Most relevant pages to the assignment are in public/pages/forms.
+
+	The front page file is in public/resources/views.
+     --}}

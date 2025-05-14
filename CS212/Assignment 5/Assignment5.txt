@@ -1,0 +1,206 @@
+#
+# CS212 - Assignment 5
+# Todd Carter
+# cart7982@vandals.uidaho.edu
+# 2-22-2024
+#
+
+#
+# This program uses much of the same from Assignment 4.
+# New functions to handle the new data lists were added.
+#
+# Information added for the turtles:
+#   names[] - List of the turtle names.
+#   move[()] - List of paired lower and upper movement bounds. (2 requirements)
+#   odds[] - List of odds modifiers for a stall chance.
+#   home[] - List of hometowns for the turtles.
+#
+
+import turtle
+from turtle import *
+import random
+
+#
+#Function to draw polygons.
+#
+def poly(t,sides,len):
+    for _ in range(sides):
+        t.forward(len)
+        t.right(360/sides)
+
+#
+#Function to draw the start and finish lines.
+#
+def drawStartFinish(lin, start_x, fin_x):
+    t = Turtle()
+    t.shape("blank")
+
+    #Draw the finish line first (it is less elaborate than the start line):
+    t.color((1,0,0))
+    t.teleport(fin_x-10, -(lin/2))
+    poly(t,4,10)
+    t.forward(10)
+    t.left(90)
+    t.forward(lin+10)  #+10 to account for size of the squares.
+    t.right(90)
+    t.backward(10)
+    poly(t,4,10)
+
+    #Draw the starting line second:
+    t.color((0,1,0))
+    t.teleport(start_x, -(lin/2))    
+    poly(t,4,10)
+    t.forward(10)
+    poly(t,4,10)
+    t.left(90)
+    t.forward(lin+10)
+    t.right(90)
+    t.backward(10)
+    poly(t,4,10)
+    t.forward(10)
+    poly(t,4,10)
+
+#
+#Function to add to list of turtles and then place them at the start line.
+#Returns the total number of turtles for use in the game loop.
+#
+def placeTurtles(turts, lin, start_x):
+    num_turts = input("\nEnter the number of racers: \n")
+  
+    #Loop to create requested number of turtles.
+    for _ in range(int(num_turts)):
+        temp = Turtle()
+        #random RGB
+        temp.color(random.random(),random.random(),random.random())
+        temp.shape("turtle")
+        temp.speed(random.randint(5,10))  #random speed for fun
+        temp.penup()
+        turts.append(temp)
+
+    #Find the distance between each starting turtle using the length of the
+    #start line.
+    dist = lin/int(num_turts)
+
+    #This calculates the starting y position based on
+    #the length of the start line, with a half interval
+    #distance given from either end, then adds dist for each
+    #additional turtle.
+    for i in range(0, int(num_turts)):
+        turts[i].teleport(start_x+35, (-(lin/2)+(dist/2)+(dist*i)))
+
+    return num_turts
+
+#
+# Functions for lists added in Assignment 5 start here:
+#
+#Function to create list of names with same index as turtles:
+def giveName(turts, names):    
+    possible_names = ["Bill","George","Harvey","Landrover","Green Machine",
+                  "Dante","Gerbil With A Shell","Leaf Eater","Thomas",
+                  "Michelle","Sonya","Queen of Carrots","Miss Tank",
+                  "Chief","Carson","Billy Jean","Roxanne","Carol"]
+    for _ in turts:
+        name = random.choice(possible_names)
+	#List comprehension.  This removes the name from the list so
+	#it can't be used again.
+        possible_names = [nam for nam in possible_names if nam != name]
+        names.append(name)
+
+#Function to create list of hometowns. 
+def giveHometown(turts, home):
+    hometowns = ["Kansas City","New York","Hammock, Michigan", "Topeka",
+                 "Nashville","Johannesburg","L.A.","San Antonio","Seattle",
+                 "Toronto","Silver City","Reno","Vanderburg, California",
+                 "Jonestown","Chicago","Savannah","Columbus"]
+    for _ in turts:
+        hometown = random.choice(hometowns)
+	#Like the names, list comprehension removes repeat hometowns.
+        hometowns = [hom for hom in hometowns if hom != hometown]
+        home.append(hometown)
+
+#Function to create list of stalling odds modifiers.
+#The lower these numbers, the higher the chance of stalling.
+def giveOdds(turts,odds):
+    for _ in turts:
+        odds.append(random.randint(0,100))
+
+#Function to create list of lower and upper movement speed pairs.
+#Element [i][0] is the lower bound.
+#Element [i][1] is the upper bound.
+def giveMove(turts, move):
+    move_dist = 10  #move_dist is the base movement speed.
+    move_mod = 10  #move_mod is used to control upper and lower bound.
+    for _ in turts:
+        move.append((int(random.randint(move_dist-move_mod, move_dist)),
+                     int(random.randint(move_dist, move_dist+move_mod))))
+
+#
+# Main begins here:
+#
+lin = 250  #Length of the start and finish line.
+start_x = -300  #location of the starting line.
+fin_x = 250  #Location of the finish line.
+turts = []
+
+#---NEW VARIABLES FOR ASSIGNMENT 5:
+names = []
+#move[] contains both upper and lower bounds of the random move,
+#as required by the assignment, each held in a coordinate pair:
+move = []
+#Hometown:
+home = []
+#Stall chance, or chance turtle won't move:
+odds = []
+stall_chance = 0
+#-----
+
+#First draw the start and finish lines using a function:
+drawStartFinish(lin, start_x, fin_x)
+
+#Then pick and place the turtles:
+num_turts = placeTurtles(turts, lin, start_x)
+
+#Run the Assignment 5 functions to load the lists:
+giveName(turts, names)
+giveHometown(turts,home)
+giveMove(turts,move)
+giveOdds(turts,odds)
+
+#
+# The game loop:
+#
+# For Assignment 5, the forward movement variables were changed to
+# be elements from the movement list indexed to each turtle.
+# Element [i][0] is minimum movement, and [i][1] is maximum movement.
+#
+print("\nRacers are: ")
+for i in range(len(names)):
+    print("#"+str(i + 1)+" "+names[i]+":"+
+          "\n     Hometown: "+home[i]+
+          "\n     Average speed: "+str((move[i][1]+move[i][0])/2)+
+          "\n     %Stall chance: "+str(100 - odds[i]))
+    
+guess = input("\nGuess which racer will win!  Enter their number!\n")
+loc = turts[0].pos()  #Capture location of pole position turtle.
+while loc[0] < fin_x:  #Loop continues until a turtle is past the finish line
+    for i in range(0, int(num_turts)):
+        #The index is used to ID the turtles for the win condition.
+
+        #---New Code for Assignment 5:
+        #A 4% chance of stalling is expected, which is affected by the odds
+        #for each turtle.
+        stall_chance = random.randint(0,odds[i])        
+        if stall_chance > 4:
+            turts[i].forward(random.randint(move[i][0],move[i][1]))
+        else:
+            print(names[i]+" stalled!")
+        #-----
+        
+        loc = turts[i].pos()
+        if loc[0] >= fin_x:
+            print("Racer #"+str(i+1)+" "+names[i]+" wins the race!")
+            if int(guess) == int(i+1):
+                print("You guessed right! Congrats!")
+            else:
+                print("You guessed wrong.  Too bad!")
+            break   

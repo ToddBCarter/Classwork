@@ -1,0 +1,601 @@
+#
+# CS 212
+# Assignment 5
+# Todd Carter
+# cart7982@vandals.uidaho.edu
+# 3-15-2024
+#
+
+#
+# This is a simple pet game program.
+# It uses a class named pet to create a simple text game.
+# The components of the assignment are:
+#
+# Required:
+#   self.name
+#   self.species
+#   self.health
+#   self.hunger
+#
+#   __init__
+#   print()
+#   feed()
+#
+#
+#  NOTE: The player's "score" is player_health and is contained within wizard_battle().
+#       
+#
+# For assignment:
+#   self.food_pref
+#   self.cleanliness
+#   self.happiness
+#   self.magic_atk
+#
+#   play()
+#       - has semi-random outcomes
+#       - provides additional user choice
+#   walk()
+#       - has semi-random outcomes
+#       - provides additional user choice
+#   wash()
+#       - has semi-random outcomes
+#   wizard_battle() (only occurs during play(), walk(), or wash())
+#       - has semi-random outcomes
+#       - provides additional user choice
+#       - Contains player's "score" player_health that is adjusted during battles.
+#
+# Extra credit:
+# self.items (added through random events)
+# Random events in walk() and play()
+#
+#
+
+
+import random
+
+MAX_STAT = 100
+# Numbers used for calculations.
+# These are small, as update() makes adjustments in addition to how these are used.
+LOW_STAT = MAX_STAT / 10
+SM_AMT = MAX_STAT / 50   #Small amount for calculations
+MD_AMT = MAX_STAT / 30   #Medium
+LG_AMT = MAX_STAT / 10   #Large
+V_LG_AMT = MAX_STAT / 5  #Very large
+
+class pet(object):
+    def __init__(self):
+        self.name = "NULL"
+        self.species = "NULL"
+        
+        #Determines if the pet likes the chosen food:
+        self.food_pref = self.random_food()
+
+        self.health = MAX_STAT
+        self.hunger = MAX_STAT        
+        self.cleanliness = MAX_STAT
+        self.happiness = MAX_STAT
+
+        #How effective the pet is against you in a duel:
+        self.magic_atk = 0  
+        
+        #Items list.  Allows dog and fish to find items that
+        #increase their attack:
+        self.items = []
+
+
+    #
+    # print() shows the pet's stats each loop of the game.
+    #
+    def print(self):
+        print("Name:",self.name,
+              "\nSpecies:",self.species,
+              "\nHealth:",int(self.health),
+              "\nHunger:",int(self.hunger),
+              "\nCleanliness:",int(self.cleanliness),
+              "\nHappiness:",int(self.happiness))
+
+
+    #
+    # update() handles regular changes to stats over time,
+    # as well as warnings about stats.
+    # It is run every cycle of the game loop.
+    #
+    def update(self):
+        self.hunger -= (MD_AMT)
+        self.happiness -= (MD_AMT)
+
+        #Cleanliness degrades over time,
+        #but at a slower rate for the fish.
+        if self.species == "Fish":
+            self.cleanliness -= (SM_AMT)
+        else:
+            self.cleanliness -= (LG_AMT)
+
+        #Checks if hunger, cleanliness, or happiness are too low.
+        #If any of them are, then the pet starts to lose health.
+        if self.hunger <= 0 or self.happiness <= 0 or self.cleanliness <= 0:
+            self.health -= LG_AMT
+        else:
+            self.health += LG_AMT
+            
+        if self.hunger < LOW_STAT and self.hunger > 0:
+            print("\n",self.name,"is hungry!\n")
+        elif self.hunger <= 0:
+            print("\n",self.name,"is starving!\n")
+            
+        if self.cleanliness < LOW_STAT:            
+            print("\n",self.name,"is dirty!\n")
+        elif self.cleanliness <= 0:
+            print("\n",self.name,"is getting sick from the filth!")
+            
+        if self.happiness < LOW_STAT:
+            print("\n",self.name,"is sad!\n")
+        elif self.happiness <= 0:
+            print("\n",self.name,"is miserable!\n")
+
+        # This block cleans up the states to ensure
+        # they do not go outside bounds of (0, MAX_STAT).
+        if self.hunger < 0:
+            self.hunger = 0
+        elif self.hunger > MAX_STAT:
+            self.hunger = MAX_STAT
+            
+        if self.happiness < 0:
+            self.happiness = 0
+        elif self.happiness > MAX_STAT:
+            self.happiness = MAX_STAT
+            
+        if self.cleanliness < 0:
+            self.cleanliness = 0
+        elif self.cleanliness > MAX_STAT:
+            self.cleanliness = MAX_STAT
+
+        if self.health > MAX_STAT:
+            self.health = MAX_STAT
+        elif self.health <= 0:
+            print("Your pet has died!  Tragedy!")
+            return False  #If the pet dies, this breaks the game loop.
+        
+        return True
+
+    #
+    # This function handles the user input for feeding.
+    # The function random_food() makes each pet have a random food preference.
+    #
+    def feed(self):
+        print("\nWhat brand of food do you want to feed your pet?")
+        print("\n1. Sallow Chow - Some Pet's Choice!",
+              "\n2. Bisky Whisky  - Kibble for All!",
+              "\n3. Fisharina - All Pets Like Fish!",
+              "\n4. Fanciest Feastiest - Yet Your Pet Still Won't Eat It!"
+              )
+        brand = input()
+        if brand in self.food_pref:
+            print("Your pet enjoyed that meal!")
+            self.hunger += (V_LG_AMT)
+        else:
+            print("Your pet was ambivalent about its food, but it ate.")
+            self.hunger += (V_LG_AMT)
+
+
+    #
+    # Washing the pet comes with a chance for a random event of a magic battle.
+    #
+    # Washing all pets gets them clean, but for different amounts.
+    # Dog gets the least clean, but doesn't cause other troubles.
+    # Fish is easiest to clean.
+    # Cat and bird have a chance of triggering a magic battle.
+    #
+    def wash(self):
+        battle = random.choice(["True","False"]) #This line means you won't always fight the pet.
+        if self.species == "Dog":
+            print("\nBath disaster!  Water everywhere!  But still, cleaner!\n")
+            self.cleanliness += (MAX_STAT * 0.6) #Large amounts are added for each successful bathing.
+        if self.species == "Cat":
+            if battle:
+                print("\nHow dare you try to befoul its majestic fur!  Prepare for a duel!")
+                battle = self.wizard_battle()
+                if battle:
+                    print("\nThe water runs red, but your wounds are worth the clean fluff!\n")
+                    self.cleanliness += (MAX_STAT * 0.7)
+                else:
+                    print("\nYour cat's magic is too much!  You only got it extra wet!")
+                    self.cleanliness += (MAX_STAT * 0.4)
+
+            else:
+                print("\nYou manage to get it clean in relative safety!")
+                self.cleanliness += (MAX_STAT * 0.9)
+        if self.species == "Fish":
+            print("\nYou scrub out all the excess algae and gunk from the tank.\n")
+            self.cleanliness += (MAX_STAT * 0.9)
+        if self.species == "Bird":
+            if battle:
+                print("\nYou touched its discarded poopy feathers!  How dare you!  Prepare to fight!")
+                battle = self.wizard_battle()
+                if battle:
+                    print("\nThe house is slightly on fire now, but the cage is clean!\n")
+                    self.cleanliness += (MAX_STAT * 0.7)
+                else:
+                    print("\nYour bird's magic is too much!  You manage to recover a few dirty newspapers!")
+                    self.cleanliness += (MAX_STAT * 0.4)
+            else:
+                print("\nYou manage to get the cage clean in relative safety!")
+                self.cleanliness += (MAX_STAT * 0.9)
+                
+    #
+    # Taking your pet for a walk results in different outcomes for different species.
+    # Dogs initiate a wizard duel and have a chance to acquire an item.
+    # Cats and birds gain happiness but lose cleanliness.
+    # Fish initiate a wizard duel at the lakeside and have a chance to acquire an item.
+    #
+    def walk(self):
+        loc = "0"
+
+        #Dogs initiate immediate duel on going outside:
+        if self.species == "Dog":
+            print("\nYour dog is so excited it needs to express itself the only way dogs know how...\nThrough a magic battle!")
+            battle = self.wizard_battle()
+            if battle == False:
+                if "Stick" not in self.items:
+                    print("After beating you, your dog found a really great stick!\n")
+                    self.items.append("Stick")
+                print("Some of the park is fire but your dog is happy.  Time to head home!")
+                return 1
+            else:
+                print("After losing, your dog just wants to go home.\n")
+                return 0
+
+        #Menu loop:
+        while(True):
+            print("\nIt's a nice day for a walk!  Where would you like to take your pet?")
+            print("\n1. The good park",
+                  "\n2. The okay park",
+                  "\n3. The lakeside park",
+                  )
+            loc = input()
+            if loc != "0":
+                break
+
+        #Things that happen at the parks:
+        if loc in ['1','good park','Good Park']:
+            print("\nThe good park was closed due to the increase in magic battles.\nPay your taxes, vote liberal.")
+            self.happiness -= 10
+            return 0
+        elif loc in ['2','The okay park','The Okay Park']:
+            if self.species == "Cat":
+                print("\nYour cat is thrilled, yet terrified.  It can't wait to go back.\n")
+                self.happiness += V_LG_AMT
+                self.cleanliness -= MD_AMT
+            elif self.species == "Fish":
+                print("\nYour fish seems mostly unchanged.\nYou're not sure if it can see out of the bowl.\n")
+                self.happiness += LG_AMT
+            elif self.species == "Bird":
+                print("\nIts plummage comes alive outside.  It thrills onlookers and is thrilled by them!\n")
+                self.happiness += V_LG_AMT
+        elif loc in ['3','The lakeside park','The Lakeside Park']:
+            if self.species == "Cat" or self.species == "Bird":
+                print("\nThe waterside is pleasant.  Your pet enjoys the shore in the sun!")
+                self.happiness += V_LG_AMT
+                self.cleanliness -= SM_AMT
+            elif self.species == "Fish":
+                print("\nSeeing the water reminds your fish of its blood-drenched heritage!\nPrepare to fight!")
+                battle = self.wizard_battle()
+                if battle == False:
+                    if "Magic stone" not in self.items:
+                        print("\nAfter beating you, your fish discovers a magic stone in its bowl!\n")
+                        self.items.append("Magic Stone")
+                    print("You take your fish and hurry home!\n")
+                else:
+                    print("The park was damaged!  You take your fish and hurry home!\n")
+                    return 0
+                        
+    #
+    # play() lets the player make direct stat adjustments through their choice of action.
+    # Each action results in slightly different adjustments depending on species.
+    #
+    def play(self):
+        print("\nWhat would you like to play?")
+        print("\n1. Chase",
+              "\n2. Fetch",
+              "\n3. Tug of War",
+              "\n4. Wrestle",
+              "\n5. Wizard Battle"
+              )
+        action = input()
+
+        if action in ['1','Chase','chase']:
+            if self.species == "Dog":
+                print("Unbridled excitement.  You chase each other for an hour!\n")
+                self.hunger -= (MD_AMT)
+                self.happiness += (V_LG_AMT)
+                self.cleanliness -= (LG_AMT)
+            elif self.species == "Cat":
+                print("You manage to convince it to run around for a bit.\n")
+                self.hunger -= (MD_AMT)
+                self.happiness += (LG_AMT)
+                self.cleanliness -= (MD_AMT)
+            elif self.species == "Fish":
+                print("It excitedly chases your finger around for a few minutes.\n")
+                self.hunger -= (MD_AMT)
+                self.happiness += (LG_AMT)
+            elif self.species == "Bird":
+                print("Your bird stares at you worriedly.  Why are you moving like that...?\n")
+                self.hunger -= (MD_AMT)
+                self.happines -= (SM_AMT)
+                self.cleanliness -= (SM_AMT)
+        elif action in ['2','Fetch','fetch']:
+            if self.species == "Dog":
+                print("Unbridled excitement.  You play fetch for an hour!\n")
+                self.hunger -= (MD_AMT)
+                self.happiness += (V_LG_AMT)
+                self.cleanliness -= (MD_AMT)
+            elif self.species == "Cat":
+                print("Your cat gladly chases after the toy, and you could swear it brought it back, too.\n")
+                self.hunger -= (MD_AMT)
+                self.happiness += (LG_AMT)
+                self.cleanliness -= (SM_AMT)
+            elif self.species == "Fish":
+                print("It runs after the toss, but turns back when there's no food reward.\n")
+                self.hunger -= (MD_AMT)
+                self.happiness += (MD_AMT)
+            elif self.species == "Bird":
+                print("It jumps out of its feathers!  Then it tosses the toy up a few times to assert dominance.\n")
+                self.hunger -= (MD_AMT)
+                self.happiness += (LG_AMT)
+                self.cleanliness -= (SM_AMT)
+        elif action in ['3','Tug of War','tug of war']:
+            if self.species == "Dog":
+                print("Unbridled excitement.  You play Tug of War for an hour!\n")
+                self.hunger -= (MD_AMT)
+                self.happiness += (V_LG_AMT)
+                self.cleanliness -= (SM_AMT)
+            elif self.species == "Cat":
+                print("While fiercely trying to kill a string, you play some Tug of War.\n")
+                self.hunger -= (MD_AMT)
+                self.happiness += (LG_AMT)
+                self.cleanliness -= (SM_AMT)
+            elif self.species == "Fish":
+                print("You dangle a snack to it and you can feel it tug the food from your fingers!\n")
+                self.hunger += (MD_AMT)
+                self.happiness += (V_LG_AMT)
+            elif self.species == "Bird":
+                print("Tug of War turns into screeching until you let go.  Your bird looks satisfied with victory!\n")
+                self.hunger -= (MD_AMT)
+                self.happiness += (V_LG_AMT)
+                self.cleanliness -= (MD_AMT)
+        elif action in ['4','Wrestle','wrestle']:
+            if self.species == "Dog":
+                print("Unbridled excitement.  You wrestle for an hour!\n")
+                self.hunger -= (MD_AMT)
+                self.happiness += (V_LG_AMT)
+                self.cleanliness -= (MD_AMT)
+            elif self.species == "Cat":
+                print("You come away bloody and your cat comes away frazzled!\n")
+                self.hunger -= (MD_AMT)
+                self.happiness += (LG_AMT)
+                self.cleanliness -= (MD_AMT)
+            elif self.species == "Fish":
+                print("It neatly avoids your lumbering fingers. The size difference is terrifying!\n")
+                self.hunger -= (MD_AMT)
+                self.happiness -= (LG_AMT)
+            elif self.species == "Bird":
+                print("You decide petting its pretty head is better than risking the tyranny of the beak.\n")
+                self.hunger -= (MD_AMT)
+                self.happiness += (V_LG_AMT)
+                self.cleanliness -= (SM_AMT)
+        elif action in ['5','Wizard Battle','wizard battle']:
+            self.wizard_battle()
+
+    #
+    # wizard_battle() handles the magic dueling system.
+    # This activates whenever the pet wants to duel the player for some reason.
+    # The system creates a simple contested dice roll between the player and pet.
+    # Each pet is assigned a unique magic_atk value, with any item bonuses included.
+    # The player chooses a weapon that picks their combat value.
+    #
+    # Though the battles harm the pet's health, the pet is healed at the end of the fight.
+    #
+    def wizard_battle(self):
+        print("You and your pet square off for a magic duel!")
+        player_health = 100
+        combat_skill = 0
+        spells = ["Magic Missile","Fireball","Telekinesis","Prestidigitation"]
+
+        # Loop to choose player weapon:
+        while(True):
+            print("Which weapon do you pick?\n",
+                  "1. Staff\n",
+                  "2. Spellbook\n",
+                  "3. Wand\n",
+                  "4. Bare Hands\n"
+                  )
+            weapon = input()
+            if weapon in ['1','Staff','staff']:
+                combat_skill = 85
+                break
+            elif weapon in ['2','Spellbook','spellbook']:
+                combat_skill = 90
+                break
+            elif weapon in ['3','Wand','wand']:
+                combat_skill = 75
+                break
+            elif weapon in ['4','Bare Hands','bare hands']:
+                combat_skill = 50
+                break
+            else:
+                print("Input which spell you want from the list!")
+
+        #Check for an item and add a damage boost if found:
+        if self.species == "Dog":
+            if "Stick" in self.items:
+                print("\n"+self.name+" wields its stick fiercely!  Damage up!")
+                self.magic_atk = 85
+        if self.species == "Fish":
+            if "Magic Stone" in self.items:
+                print("\n"+self.name+" draws power from its magic stone!  Damage up!")
+                self.magic_atk = 70
+
+        #Battle loop that continues until one or the other is finished:
+        while(True):
+            print("\n***************")
+            print("Pet Health:",self.health)
+            print("Player Health:",player_health)
+            while(True):
+                print("Pick a spell to use:\n",
+                      "1. Magic Missile\n",
+                      "2. Fireball\n",
+                      "3. Telekinesis\n",
+                      "4. Prestidigitation\n"
+                      )
+                attack = input()
+                attack = self.cast_spell(attack)
+                if attack > 0:
+                    break
+
+            pet_attack = random.choice(spells)
+            print("\nYour pet casts",pet_attack,"!")
+            pet_attack = self.cast_spell(pet_attack)
+
+            if random.randint(0, combat_skill+attack) > random.randint(0, self.magic_atk+pet_attack):
+                print("\nYou land a hit!")
+                self.health -= 25
+            else:
+                print("Your pet landed a hit!")
+                player_health -= 25
+
+            if self.health <= 0:
+                print("\nYou win!  But at what cost?\n")
+                self.health = MAX_STAT
+                self.happiness -= MD_AMT
+                self.cleanliness -= V_LG_AMT
+                return True
+            elif player_health <= 0:
+                print("\nYou lost! Your pet looks so happy you can't be mad!")
+                self.health = MAX_STAT
+                self.happiness += LG_AMT
+                self.cleanliness -= V_LG_AMT
+                return False
+
+
+    # This function supports the wizard_battle() function.
+    # This checks which spell was chosen and assigns a value to return.
+    def cast_spell(self, attack):
+        if attack in ['1','Magic Missile','magic missile']:
+            combat_mod = 10
+        elif attack in ['2','Fireball','fireball']:
+            combat_mod = 20
+        elif attack in ['3','Telekinesis','telekinesis','tk']:
+            combat_mod = 5
+        elif attack in ['4','Prestidigitation','prestidigitation']:
+            combat_mod = 1
+        else:
+            return 0
+        return combat_mod
+
+    #
+    # Random picker for a food preference
+    # First checks what species it is to decide how picky the pet is.
+    # Dogs are least picky, birds are most picky.
+    #
+    def random_food(self):
+        picky_mod = 0
+        
+        if self.species == "Dog":
+            picky_mod = 0
+        elif self.species == "Cat":
+            picky_mod = 2
+        elif self.species == "Fish":
+            picky_mod = 2
+        elif self.species == "Bird":
+            picky_mod = 3
+            
+        picky = random.randint(picky_mod,3)
+        
+        if picky == 0:
+            return "Sallow Chow"
+        elif picky == 1:
+            return "Bisky Whisky"
+        elif picky == 2:
+            return "Fisharina"
+        elif picky == 3:
+            return "Fanciest Feastiest"
+
+    #
+    # Function to let player set the species.
+    # This also sets the magic_atk value for magic battling.
+    #
+    def set_species(self):
+        while(True):
+            print("Pick what type of pet you want:")
+            species = input("1. Dog\n2. Cat\n3. Fish\n4. Bird\n")
+            if species in ["1", "Dog", "dog"]:
+                self.species = "Dog"
+                self.magic_atk = 65
+                break
+            elif species in ["2", "Cat", "cat"]:
+                self.species = "Cat"
+                self.magic_atk = 95
+                break
+            elif species in ["3", "Fish", "fish"]:
+                self.species = "Fish"                
+                self.magic_atk = 55
+                break
+            elif species in ["4", "Bird", "bird"]:
+                self.species = "Bird"
+                self.magic_atk = 85
+                break
+            else:
+                print("Please enter the name of the species!")
+                species = "NULL"
+
+
+p1 = pet()
+
+print("Welcome to PetClass, a pet you almost own!")
+p1.set_species()
+p1.name = input("Enter a name for your pet:\n")
+
+run = True
+while(run):
+
+    p1.print()
+
+    print("\nWhat would you like to do with "+str(p1.name)+"?")
+    print(str("1. Feed\n")
+          +str("2. Play\n")
+          +str("3. Bathe\n")
+          +str("4. Walk\n")
+          +str("5. Exit")
+          )
+    action = input()
+
+    if action in ["1", "Feed", "feed"]:
+        p1.feed()
+    elif action in ["2", "Play", "play"]:
+        p1.play()
+    elif action in ["3", "Bathe", "bathe"]:
+        p1.wash()
+    elif action in ["4", "Walk", "walk"]:
+        p1.walk()
+    elif action in ["5", "Exit", "exit"]:
+        break
+
+    run = p1.update()
+
+print("Game over!  Goodbye!")
+
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+    

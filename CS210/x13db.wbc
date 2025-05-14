@@ -1,0 +1,258 @@
+% compiler: GNU Prolog 1.4.4
+% file    : /y/shared/Engineering/cs-drbc/assignments/cs210/x12db.pl
+
+
+file_name('/y/shared/Engineering/cs-drbc/assignments/cs210/x12db.pl').
+
+
+predicate(male/1,6,static,private,monofile,global,9).
+
+
+clause(male(ali),[
+    get_atom(ali,0),
+    proceed]).
+
+
+clause(male(carl),[
+    get_atom(carl,0),
+    proceed]).
+
+
+clause(male(ed),[
+    get_atom(ed,0),
+    proceed]).
+
+
+clause(male(frank),[
+    get_atom(frank,0),
+    proceed]).
+
+
+clause(male(hugo),[
+    get_atom(hugo,0),
+    proceed]).
+
+
+clause(male(kurt),[
+    get_atom(kurt,0),
+    proceed]).
+
+
+clause(male(rene),[
+    get_atom(rene,0),
+    proceed]).
+
+
+clause(male(vico),[
+    get_atom(vico,0),
+    proceed]).
+
+
+clause(male(tino),[
+    get_atom(tino,0),
+    proceed]).
+
+
+predicate(female/1,16,static,private,monofile,global,11).
+
+
+clause(female(berta),[
+    get_atom(berta,0),
+    proceed]).
+
+
+clause(female(dora),[
+    get_atom(dora,0),
+    proceed]).
+
+
+clause(female(guna),[
+    get_atom(guna,0),
+    proceed]).
+
+
+clause(female(ina),[
+    get_atom(ina,0),
+    proceed]).
+
+
+clause(female(jane),[
+    get_atom(jane,0),
+    proceed]).
+
+
+clause(female(laura),[
+    get_atom(laura,0),
+    proceed]).
+
+
+clause(female(mia),[
+    get_atom(mia,0),
+    proceed]).
+
+
+clause(female(olga),[
+    get_atom(olga,0),
+    proceed]).
+
+
+clause(female(wera),[
+    get_atom(wera,0),
+    proceed]).
+
+
+clause(female(susan),[
+    get_atom(susan,0),
+    proceed]).
+
+
+clause(female(uta),[
+    get_atom(uta,0),
+    proceed]).
+
+
+predicate(parent/2,28,static,private,monofile,global,24).
+
+
+clause(parent(ali,guna),[
+    get_atom(ali,0),
+    get_atom(guna,1),
+    proceed]).
+
+
+clause(parent(ali,hugo),[
+    get_atom(ali,0),
+    get_atom(hugo,1),
+    proceed]).
+
+
+clause(parent(carl,ina),[
+    get_atom(carl,0),
+    get_atom(ina,1),
+    proceed]).
+
+
+clause(parent(carl,jane),[
+    get_atom(carl,0),
+    get_atom(jane,1),
+    proceed]).
+
+
+clause(parent(ed,kurt),[
+    get_atom(ed,0),
+    get_atom(kurt,1),
+    proceed]).
+
+
+clause(parent(frank,mia),[
+    get_atom(frank,0),
+    get_atom(mia,1),
+    proceed]).
+
+
+clause(parent(frank,olga),[
+    get_atom(frank,0),
+    get_atom(olga,1),
+    proceed]).
+
+
+clause(parent(hugo,wera),[
+    get_atom(hugo,0),
+    get_atom(wera,1),
+    proceed]).
+
+
+clause(parent(hugo,rene),[
+    get_atom(hugo,0),
+    get_atom(rene,1),
+    proceed]).
+
+
+clause(parent(hugo,vico),[
+    get_atom(hugo,0),
+    get_atom(vico,1),
+    proceed]).
+
+
+clause(parent(kurt,tino),[
+    get_atom(kurt,0),
+    get_atom(tino,1),
+    proceed]).
+
+
+clause(parent(kurt,uta),[
+    get_atom(kurt,0),
+    get_atom(uta,1),
+    proceed]).
+
+
+clause(parent(berta,guna),[
+    get_atom(berta,0),
+    get_atom(guna,1),
+    proceed]).
+
+
+clause(parent(berta,hugo),[
+    get_atom(berta,0),
+    get_atom(hugo,1),
+    proceed]).
+
+
+clause(parent(dora,ina),[
+    get_atom(dora,0),
+    get_atom(ina,1),
+    proceed]).
+
+
+clause(parent(dora,jane),[
+    get_atom(dora,0),
+    get_atom(jane,1),
+    proceed]).
+
+
+clause(parent(guna,mia),[
+    get_atom(guna,0),
+    get_atom(mia,1),
+    proceed]).
+
+
+clause(parent(guna,olga),[
+    get_atom(guna,0),
+    get_atom(olga,1),
+    proceed]).
+
+
+clause(parent(ina,wera),[
+    get_atom(ina,0),
+    get_atom(wera,1),
+    proceed]).
+
+
+clause(parent(ina,rene),[
+    get_atom(ina,0),
+    get_atom(rene,1),
+    proceed]).
+
+
+clause(parent(ina,vico),[
+    get_atom(ina,0),
+    get_atom(vico,1),
+    proceed]).
+
+
+clause(parent(jane,susan),[
+    get_atom(jane,0),
+    get_atom(susan,1),
+    proceed]).
+
+
+clause(parent(laura,tino),[
+    get_atom(laura,0),
+    get_atom(tino,1),
+    proceed]).
+
+
+clause(parent(laura,uta),[
+    get_atom(laura,0),
+    get_atom(uta,1),
+    proceed]).

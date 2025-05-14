@@ -1,0 +1,59 @@
+#include<stdio.h>
+#include<
+
+//Check sample code for this section.
+
+int main(void)
+{
+
+
+
+
+int tokenize(char *line, int length)
+{
+	int start = 0;
+	int end = 0;
+	char token[MAXTOKEN];  //Already defined earlier in code.
+	for(end = 0; end <= length; end++)
+	{
+		if (isspace(line[end]))
+		{
+			snprintf(token, end-start, &line[start]);   //only copy over a certian number of chars to another destination.
+			printf("Token: %s\n", token);
+			start = end;
+		}
+		
+	}
+
+	
+	printf("%s\n",line);  //Print the line as a string.
+	
+	return 0;
+	
+
+}
+
+//Assign meaning to tokens = lexxing.
+void lex (char *line, int start, int end, int length)
+{
+	char token[MAXTOKEN];
+	while((start < length) && isspace(line[start]))
+	{
+		start++;
+	}
+	if (start >= end)
+	{
+		//return 0;
+	}
+	
+	snpringf(token, end-start+1, &line[start]);
+	printf("Token: %s\n", token);
+
+}
+
+}
+
+
+//When compiling, use gcc -Wall w01.c, which means Warn All, or Show All Warning Messages.
+
+

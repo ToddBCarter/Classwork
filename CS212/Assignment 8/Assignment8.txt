@@ -1,0 +1,160 @@
+#
+# CS212
+# Assignment 8
+# Todd Carter
+# cart7982@vandals.uidaho.edu
+# 3-28-2024
+#
+
+#
+# Elements that were added to expand the L-system:
+#   - Added color control
+#   - Added color randomization
+#   - Added general curve control
+#   - Added polygon "leaves"
+#
+# A for loop is used to draw multiple plants.
+#
+
+import turtle
+from turtle import *
+import random
+
+# L string to demonstrate color control, color randomization,
+# and polygon productions.  This produces a brownish stem with
+# randomly colored polygons on the ends of the branches.
+# A screenshot is in the assignment.
+berryBushes = {"F":"FF", "X":"RRGFrr[[-X]+X]FS@&RRG"}
+
+# This L string demonstrates a comparison for the general curve.
+# A screen shot is in the assignment.
+curvedBushes = {"F":"FF", "X":"TRRGFrr[[-X]+X]FS#@&RRG"}
+
+
+
+#Take a string and draw a picture from it:
+def draw(t, s, l = 20, a = 45, theta = 22.5):
+    stack = []
+    wid = 1
+    
+    #Color values:
+    R = 0
+    G = 0
+    B = 0
+
+    #This acts as a flag to set a general curve:
+    curve = 0
+    
+    #Turn the turtle upwards:
+    t.setheading(90)
+    
+    for c in s:        
+        #This block handles colorizing the lines:
+        if R <= 0.66:
+            if c == "R":
+                R += 0.33
+        if G <= 0.66:
+            if c == "G":
+                G += 0.33
+        if B <= 0.66:
+            if c == "B":
+                B += 0.33
+        if R >= 0.33:
+            if c == "r":
+                R -= 0.33
+        if G >= 0.33:
+            if c == "g":
+                G -= 0.33
+        if B >= 0.33:
+            if c == "b":
+                B -= 0.33
+
+        #Reset current color:
+        if c == '&':
+            R = 0
+            G = 0
+            B = 0
+                
+        #Random color shuffle:
+        if c == 'S':
+            R = random.random()
+            G = random.random()
+            B = random.random()
+        
+        t.pencolor(R,G,B)        
+
+        #General movement:
+        if c == 'F':
+            t.forward(l)
+        if c == 'f':
+            t.penup()
+            t.forward(1)
+            t.pendown()
+        if c == '+':
+            t.left(a)
+            if curve == 2:
+                t.left(theta)
+        if c == '-':
+            t.right(a)
+            if curve == 1:
+                t.right(theta)
+        if c == '[':
+            stack.append(t.pos())
+            stack.append(t.heading())
+        if c == ']':
+            t.penup()
+            t.setheading(stack.pop())
+            t.setpos(stack.pop())
+            t.pendown()
+
+        #This block allows for a general curve by setting a flag.
+        #T curves right, t curves left, and Q ends the curving.
+        if c == "T":
+            curve = 2
+        if c == "t":
+            curve = 1
+        if c == "Q":
+            curve = 0
+
+        #Draw a hexagon like a leaf:
+        if c == "@":
+            t.right(90)
+            polygon(t, l, 6)
+            t.left(90)
+
+
+#Expand the rules string:
+def expand(s, rules):
+    newStr = ""
+    for c in s:
+        if c in rules.keys():
+            newStr += rules.get(c)
+        else:
+            newStr += c
+    return newStr
+
+
+#Support function for drawing polygons:
+def polygon(t, leng, sides):
+    for _ in range(0, sides):
+        t.forward(leng)
+        t.left(360 / sides)
+
+
+#
+# Main begins here
+#
+t = Turtle()
+t.hideturtle()
+t.speed(0)
+s = "X"
+
+for _ in range(0,5):
+    s = expand(s, curvedBushes)
+
+for i in range(0, 3):
+    t.penup()
+    t.sety(0)
+    t.setx(i * 120)
+    t.pendown()
+    draw(t, s, 5, 45)

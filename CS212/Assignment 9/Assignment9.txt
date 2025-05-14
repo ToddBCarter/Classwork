@@ -1,0 +1,237 @@
+#
+# CS212
+# Assignment 9
+# Todd Carter
+# cart7982@vandals.uidaho.edu
+# 4-4-2024
+#
+
+import turtle
+from turtle import *
+import random
+
+#
+# For Assignment 9:
+#
+#   wanderingAway = {}
+#   - A modified dragon curve rule set that creates a
+#    pattern like simple footprints that meander in a
+#    a semi-aimless fashion, like a person wandering.
+#
+#   The rules:
+#
+#   F = forward by random division of length
+#   T = 22.5 degree general curvature to the left
+#   f = Lift pen and forward by length * 50
+#   + = Turn left 90 degrees
+#   $ = Place a square (for the heel)
+#   o = Lift pen and forward by length
+#   @ = Place a hexagon
+#   O = Forward by length (repeat of F)
+#
+
+wanderAway = {"F":"TFf+$oooo@O", "O":"ttFf-$oooo@O"}
+
+#For reference:
+dragonCurve = {"F":"F+O", "O":"F-O"}
+
+
+#
+# Working on this also made me realize that I very poorly
+# did portions of the previous assignment.
+#
+# This assignment contains corrections to that assignment.
+#
+# In that way, it uses a class to store flags and other
+# data that needs to be preserved outside of draw().
+#
+# This ACTUALLY allows for a general curve, color changes,
+# and width control.
+#
+# Thank you for your patience.
+#
+
+# L string to demonstrate color control, color randomization,
+# general curve, and polygon productions.
+
+curvedBushes = {"F":"FF", "X":">>>>>TRRGFrr[[-X]+X]<<<<FS#@&RRG"}
+
+
+# Class for preserving parameters about each line drawn:
+class parameters(object):
+    def __init__(self):
+        self.curve = 0
+        self.R = 0
+        self.G = 0
+        self.B = 0
+        self.width = 1
+
+#Take a string and draw a picture from it:
+def draw(para, t, s, l = 20, a = 45, theta = 22.5):
+    stack = []
+    
+    for c in s:        
+        #This block handles colorizing the lines:
+        if para.R <= 0.66:
+            if c == "R":
+                para.R += 0.33
+        if para.G <= 0.66:
+            if c == "G":
+                para.G += 0.33
+        if para.B <= 0.66:
+            if c == "B":
+                para.B += 0.33
+        if para.R >= 0.33:
+            if c == "r":
+                para.R -= 0.33
+        if para.G >= 0.33:
+            if c == "g":
+                para.G -= 0.33
+        if para.B >= 0.33:
+            if c == "b":
+                para.B -= 0.33
+
+        #Reset current color:
+        if c == '&':
+            para.R = 0
+            para.G = 0
+            para.B = 0
+                
+        #Random color shuffle:
+        if c == 'S':
+            para.R = random.random()
+            para.G = random.random()
+            para.B = random.random()
+        
+        t.pencolor(para.R,para.G,para.B)
+        
+
+        #General movement:
+        if c == 'O':
+            t.forward(l)
+        if c == 'o':            
+            t.penup()
+            t.forward(1)
+            t.pendown()
+        if c == 'F':
+            t.forward(l)
+        if c == 'f':
+            t.penup()
+            t.forward(1*50)
+            t.pendown()
+        if c == '-':
+            t.left(a)
+            if para.curve == 2:
+                t.left(theta)
+        if c == '+':
+            t.right(a)
+            if para.curve == 1:
+                t.right(theta)
+        if c == '[':
+            stack.append(t.pos())
+            stack.append(t.heading())
+            stack.append(para.R)
+            stack.append(para.G)
+            stack.append(para.B)
+            stack.append(para.width)
+        if c == ']':
+            t.penup()
+            para.width = stack.pop()
+            para.B = stack.pop()
+            para.G = stack.pop()
+            para.R = stack.pop()
+            t.setheading(stack.pop())
+            t.setpos(stack.pop())
+            t.pendown()
+
+        t.width(para.width)
+
+        #This block allows for a general curve by setting a flag.
+        #T curves right, t curves left, and Q ends the curving.
+        if c == "T":
+            para.curve = 2
+        if c == "t":
+            para.curve = 1
+        if c == "Q":
+            para.curve = 0
+
+        #Draw a hexagon:
+        if c == "@":
+            t.right(90)
+            polygon(t, l, 6)
+            t.left(90)
+            
+        #Draw a square:
+        if c == "$":
+            t.right(90)
+            polygon(t, l, 4)
+            t.left(90)
+
+        if c == ">":
+            if para.width < 6:
+                para.width += 1
+
+        if c == "<":
+            if para.width > 1:
+                para.width -= 1;
+
+
+#Expand the rules string:
+def expand(s, rules):
+    newStr = ""
+    for c in s:
+        if c in rules.keys():
+            newStr += rules.get(c)
+        else:
+            newStr += c
+        #print("newstr is:", newStr)
+    return newStr
+
+
+#Support function for drawing polygons:
+def polygon(t, leng, sides):
+    for _ in range(0, sides):
+        t.forward(leng)
+        t.left(360 / sides)
+
+
+#
+# Main begins here
+#
+t = Turtle()
+t.hideturtle()
+t.speed(0)
+s = "F"
+
+#Turn the turtle upwards:
+t.setheading(90)
+
+for _ in range(0,4):
+    s = expand(s, wanderAway)
+
+p = parameters()
+t.penup()
+t.sety(-200)
+t.setx(-200)
+t.pendown()
+draw(p, t, s, 5, 30)
+
+
+s = "X"
+for _ in range(0,5):
+    s = expand(s, curvedBushes)
+
+p = parameters()
+t.penup()
+t.sety(-100)
+t.setx(-100)
+t.setheading(90)
+t.pendown()
+draw(p, t, s, 5, 30)
+
+
+
+
+
+
+

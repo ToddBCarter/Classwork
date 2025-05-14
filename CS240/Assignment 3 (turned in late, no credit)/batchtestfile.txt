@@ -1,0 +1,4 @@
+testprog1 5 5
+testprog1 2 2
+testprog1 3 2
+testprog1 4 5

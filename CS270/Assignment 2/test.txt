@@ -1,0 +1,5 @@
+1: Sylvester is a cat.
+2: Fido is a dog.
+3: Dexter is a boy.
+4: I like dogs, but I am not particularly fond of cats.
+5: Cats are fun to tease.

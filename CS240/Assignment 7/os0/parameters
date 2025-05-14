@@ -1,0 +1,36 @@
+# The parameters must be spelling exactly and there must
+# be at least one space between the parameter name and 
+# the parameter value. Comments have a # in column 1.
+# You need only specify those parameters that are different
+# from the default values.
+#
+# Use SCHEULDER to set the process scheduler algorithm.
+# use 1 to select FCFS
+# use 2 to select SJF
+# use 3 to select Round-Robin (default)
+#
+# SCHEDULER           3
+#
+# If a round robin scheduling technique is used, use TIMESLICE
+# set the time slice that will be used.  The default is 5.
+#
+# TIMESLICE           4
+#
+# The allowed debug parameters and their defaults are
+# INSTRUCTIONS        1
+# TRANSITIONS         1
+# PCB                 0
+# MEMORY              0
+# INTERRUPTS          0
+# WELCOME             1
+# SUMMARY             1
+#
+TIMESLICE           5
+SCHEDULER           3
+INSTRUCTIONS        1
+TRANSITIONS         1
+PCB                 0
+MEMORY              0
+INTERRUPTS          0
+WELCOME             1
+SUMMARY             1

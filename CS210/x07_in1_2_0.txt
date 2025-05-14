@@ -1,0 +1,2 @@
+- val it = 64 : int
+val it = 4 : int

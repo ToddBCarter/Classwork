@@ -1,0 +1,106 @@
+File Reader - Use getline to read a file line by line, then use isspace() to print work by word
+
+When your program is being compiled it has to go through a complex set of stages 
+in order to be translated into binary. The first step in this process is called 
+“Tokenizing”. During this step your program is broken down into individual 
+“tokens” which are the equivalent of words.
+
+The next step is to assign meaning to each token. This is called lexing.
+
+Over the next few assisngments you will build a lexer, but for this one you are 
+just building a writing a file in C that will read a file (whose path is given 
+as a command line arguement), line by line.
+
+As each line is read it shall be passed to a function that will use the 
+isspace() function to break the line appart at each space. (You can NOT use 
+strtok()). 
+
+As each space is found, the line segment is sent to another function that 
+strips off leading (and trailing) spaces and prints out:
+
+Token: the_token
+
+Sample run:
+w01 w01_in.txt
+
+Expected output:
+Token: A
+Token: dozen,
+Token: a
+Token: gross,
+Token: and
+Token: a
+Token: score
+Token: Plus
+Token: three
+Token: times
+Token: the
+Token: square
+Token: root
+Token: of
+Token: four
+Token: Divided
+Token: by
+Token: seven
+Token: Plus
+Token: five
+Token: times
+Token: eleven
+Token: Equals
+Token: nine
+Token: squared
+Token: and
+Token: no
+Token: more.
+Token: (12+144+20)
+Token: +3*sqrt(4)
+Token: /7
+Token: +5*11
+Token: =
+Token: 9^2+0
+
+You can use this a a starting point for you code. (Just copy and past it into your file):
+
+#define MAXTOKEN 256
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+// Assign meaning to tokens
+//void lex(char *line, int start, int end);
+
+// Break the string down into tokens
+//int tokenize(char *line, int length);
+
+int main(int argc, char *argv[])
+{
+   if(argc<2)
+   {
+      printf("Please specify input file.\n");
+      printf("%s /y/shared/Engineering/cs-drbc/assignments/cs210/w01_in1.txt\n", argv[0]);
+      return 1;
+   }
+   FILE * fp;
+   char * line = NULL;
+   size_t len = 0;
+   ssize_t read;
+
+   fp = fopen(argv[1], "r");
+   if (fp == NULL){
+      printf("Error: Could not open file %s\n", argv[1]);
+      exit(EXIT_FAILURE);
+  }
+
+   while ((read = getline(&line, &len, fp)) != -1) {
+      //tokenize(line, read);
+   }
+
+   fclose(fp);
+   if (line) {
+      free(line);
+   }
+   exit(EXIT_SUCCESS);
+}
+

@@ -1,0 +1,18 @@
+
+
+
+A B A B C A C A B C
+
+
+
+m = 9
+
+
+1	   c	 d = 3
+
+start from c, because need to check for matches still
+
+
+2	  bc	 d = 9
+3	 abc	 d = 5
+4	cabc	 d = 9

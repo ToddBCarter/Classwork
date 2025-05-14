@@ -1,0 +1,2 @@
+- val it = 25 : int
+val it = 36 : int

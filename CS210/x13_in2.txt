@@ -1,0 +1,12 @@
+G = ina
+
+G = jane
+
+G = wera
+
+G = rene
+
+G = vico
+
+G = susan
+

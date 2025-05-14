@@ -1,0 +1,188 @@
+Test Cases and Expected Results.
+
+job0a0:
+  This job has no process.  The operating system simple creates the Null 
+  process and then attempts to Dispatch a process and since none is
+  available, it halts.  This is testing the Dispatch transition function's
+  ability to stop when there are no more live processes to execute.
+
+job0a: pro0a
+  This job has a single process with a single Halt instruction that
+  should run for only 1 time period and then halt.  This is testing
+  all the basic operations, reading a job file, reading a process
+  file, creating a process, dispatching a process, killing a process.
+
+job0a2: pro0a
+        pro0a
+        pro0a
+  This job has three processes that each have a single Halt instruction.
+  This is testing the dispatching of several processes.
+
+job0b1: pro0b2
+  This job has a single process with three INST instructions and a Halt
+  instruction that should run for 4 time periods and then halt.  This is
+  testing the execution of a series of instructions.
+
+job0b2: pro0b1
+        pro0b2
+        pro0b3
+  This job has a three processes that have two, three, and four INST
+  instructions (respectively) and a Halt instruction.  The total
+  execution time for this job should be 12 time periods.  This is
+  testing the execution of several processes with several instructions
+  each, for this test to be successful the state of each process must be
+  correctly maintained and the correct value for the program counter must
+  be provided.
+
+job0c1: pro0c2
+  This job has a single process with seven INST instructions and a Halt
+  instruction that should run for 8 time periods and then halt.  This job
+  runs long enough that the round-robin scheduling algorithm sends the
+  process back to the Ready state with a Timeout transition.  This is
+  testing the Timeout transition.
+
+job0c2: pro0c1
+        pro0c2
+        pro0c3
+  This job has a three processes that each have six, seven, and eight
+  INST instructions (respectively) and a Halt instruction.  All these
+  processes run long enough so that they Timeout and return to the Ready
+  state when a round-robin scheduling algorithm is used.  The round-robin
+  scheduling algorithm is required to deal with a number of partially
+  executed processes, so that it will need to correctly save and restore 
+  the state of each process.  This is testing the proper use of the ready
+  queue, the accuracy of the PCB information (such as PC), and the
+  successful termination of a number of processes.
+
+job0d: pro0d1
+       pro0d2
+       pro0d3
+       pro0d4
+       pro0d5
+  This job is run with three different parameter files, so that it will
+  use all three scheduling algorithms.  It will display the execution of
+  the example used in the text on page 145 in section 5.6.1 Deterministic
+  Modeling.
+
+job0e1: pro0e1
+  This job has a single process with a NOOP instruction, which is illegal
+  since only the Null process can use the NOOP instruction.  This is 
+  testing if the NOOP instruction will be correctly flagged as an illegal
+  instruction.
+
+job0e2: pro0e2
+  This job has a single process with an illegal instruction (opcode is 55).
+  This is testing if an illegal instruction will be correctly flagged as such.
+
+job0e3: pro0xxx
+  This job refers to a process file that does not exist.  This is testing
+  the appropriateness of the error message for a missing process file.
+
+job0xxx
+  This job does not exist and should produce a "job file not found" error.
+
+job0a paraxxxx
+  This job attempts to use a parameter file that does not exist and so it
+  should produce a "parameter file not found" error.
+
+Here is the actual output from some of the above jobs.
+
+------------------------
+Output from job file = job0b2.
+
+Welcome to the CS Computer System model 341 (version 2000.0a)
+Computer configuration:
+  MEMORY_SIZE: 1024
+  SCHEDULER (1=FCFS,2=SJF,3=RR): 3
+  TIMESLICE: 5
+Time=0 Pid=0 transition=Create.
+Time=0 Pid=1 transition=Create.
+Time=0 Pid=2 transition=Create.
+Time=0 Pid=3 transition=Create.
+Time=0 Pid=1 transition=Dispatch.
+Time=1 Pid=1 instruction=INST PC=1
+Time=2 Pid=1 instruction=INST PC=2
+Time=3 Pid=1 instruction=HALT PC=3
+Time=3 Pid=1 transition=Kill.
+Time=3 Pid=2 transition=Dispatch.
+Time=4 Pid=2 instruction=INST PC=4
+Time=5 Pid=2 instruction=INST PC=5
+Time=6 Pid=2 instruction=INST PC=6
+Time=7 Pid=2 instruction=HALT PC=7
+Time=7 Pid=2 transition=Kill.
+Time=7 Pid=3 transition=Dispatch.
+Time=8 Pid=3 instruction=INST PC=8
+Time=9 Pid=3 instruction=INST PC=9
+Time=10 Pid=3 instruction=INST PC=10
+Time=11 Pid=3 instruction=INST PC=11
+Time=12 Pid=3 instruction=HALT PC=12
+Time=12 Pid=3 transition=Kill.
+
+Final Summary of Process Statistics (time=12)
+PID State Run Ready Total Name
+ 0    T     0   12    12  NULL
+ 1    T     3    0     3  pro0b1
+ 2    T     4    3     7  pro0b2
+ 3    T     5    7    12  pro0b3
+
+Average Run     Ready    Total times
+       4.00     3.33     7.33
+
+------------------------
+Output from job file = job0c2.
+
+Welcome to the CS Computer System model 341 (version 2000.0a)
+Computer configuration:
+  MEMORY_SIZE: 1024
+  SCHEDULER (1=FCFS,2=SJF,3=RR): 3
+  TIMESLICE: 5
+Time=0 Pid=0 transition=Create.
+Time=0 Pid=1 transition=Create.
+Time=0 Pid=2 transition=Create.
+Time=0 Pid=3 transition=Create.
+Time=0 Pid=1 transition=Dispatch.
+Time=1 Pid=1 instruction=INST PC=1
+Time=2 Pid=1 instruction=INST PC=2
+Time=3 Pid=1 instruction=INST PC=3
+Time=4 Pid=1 instruction=INST PC=4
+Time=5 Pid=1 instruction=INST PC=5
+Time=5 Pid=1 transition=Timeout.
+Time=5 Pid=2 transition=Dispatch.
+Time=6 Pid=2 instruction=INST PC=8
+Time=7 Pid=2 instruction=INST PC=9
+Time=8 Pid=2 instruction=INST PC=10
+Time=9 Pid=2 instruction=INST PC=11
+Time=10 Pid=2 instruction=INST PC=12
+Time=10 Pid=2 transition=Timeout.
+Time=10 Pid=3 transition=Dispatch.
+Time=11 Pid=3 instruction=INST PC=16
+Time=12 Pid=3 instruction=INST PC=17
+Time=13 Pid=3 instruction=INST PC=18
+Time=14 Pid=3 instruction=INST PC=19
+Time=15 Pid=3 instruction=INST PC=20
+Time=15 Pid=3 transition=Timeout.
+Time=15 Pid=1 transition=Dispatch.
+Time=16 Pid=1 instruction=INST PC=6
+Time=17 Pid=1 instruction=HALT PC=7
+Time=17 Pid=1 transition=Kill.
+Time=17 Pid=2 transition=Dispatch.
+Time=18 Pid=2 instruction=INST PC=13
+Time=19 Pid=2 instruction=INST PC=14
+Time=20 Pid=2 instruction=HALT PC=15
+Time=20 Pid=2 transition=Kill.
+Time=20 Pid=3 transition=Dispatch.
+Time=21 Pid=3 instruction=INST PC=21
+Time=22 Pid=3 instruction=INST PC=22
+Time=23 Pid=3 instruction=INST PC=23
+Time=24 Pid=3 instruction=HALT PC=24
+Time=24 Pid=3 transition=Kill.
+
+Final Summary of Process Statistics (time=24)
+PID State Run Ready Total Name
+ 0    T     0   24    24  NULL
+ 1    T     7   10    17  pro0c1
+ 2    T     8   12    20  pro0c2
+ 3    T     9   15    24  pro0c3
+
+Average Run     Ready    Total times
+       8.00    12.33    20.33

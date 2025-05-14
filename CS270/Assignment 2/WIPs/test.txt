@@ -1,0 +1,220 @@
+001: Sylvester is a cat.
+002: Fido is a dog.
+003: Dexter is a boy.
+004: I like dogs, but I am not particularly fond of cats.
+005: Cats are fun to tease.
+006: Sylvester is a cat.
+007: Fido is a dog.
+008: Dexter is a boy.
+009: I like dogs, but I am not particularly fond of cats.
+010: Cats are fun to tease.
+011: Sylvester is a cat.
+012: Fido is a dog.
+013: Dexter is a boy.
+014: I like dogs, but I am not particularly fond of cats.
+015: Cats are fun to tease.
+016: Sylvester is a cat.
+017: Fido is a dog.
+018: Dexter is a boy.
+019: I like dogs, but I am not particularly fond of cats.
+020: Cats are fun to tease.
+021: Sylvester is a cat.
+022: Fido is a dog.
+023: Dexter is a boy.
+024: I like dogs, but I am not particularly fond of cats.
+025: Cats are fun to tease.
+026: Sylvester is a cat.
+027: Fido is a dog.
+028: Dexter is a boy.
+029: I like dogs, but I am not particularly fond of cats.
+030: Cats are fun to tease.
+031: Sylvester is a cat.
+032: Fido is a dog.
+033: Dexter is a boy.
+034: I like dogs, but I am not particularly fond of cats.
+035: Cats are fun to tease.
+036: Sylvester is a cat.
+037: Fido is a dog.
+038: Dexter is a boy.
+039: I like dogs, but I am not particularly fond of cats.
+040: Cats are fun to tease.
+041: Sylvester is a cat.
+042: Fido is a dog.
+043: Dexter is a boy.
+044: I like dogs, but I am not particularly fond of cats.
+045: Cats are fun to tease.
+046: Sylvester is a cat.
+047: Fido is a dog.
+048: Dexter is a boy.
+049: I like dogs, but I am not particularly fond of cats.
+050: Cats are fun to tease.
+051: Sylvester is a cat.
+052: Fido is a dog.
+053: Dexter is a boy.
+054: I like dogs, but I am not particularly fond of cats.
+055: Cats are fun to tease.
+056: Sylvester is a cat.
+057: Fido is a dog.
+058: Dexter is a boy.
+059: I like dogs, but I am not particularly fond of cats.
+060: Cats are fun to tease.
+061: Sylvester is a cat.
+062: Fido is a dog.
+063: Dexter is a boy.
+064: I like dogs, but I am not particularly fond of cats.
+065: Cats are fun to tease.
+066: Sylvester is a cat.
+067: Fido is a dog.
+068: Dexter is a boy.
+069: I like dogs, but I am not particularly fond of cats.
+070: Cats are fun to tease.
+071: Sylvester is a cat.
+072: Fido is a dog.
+073: Dexter is a boy.
+074: I like dogs, but I am not particularly fond of cats.
+075: Cats are fun to tease.
+076: Sylvester is a cat.
+077: Fido is a dog.
+078: Dexter is a boy.
+079: I like dogs, but I am not particularly fond of cats.
+080: Cats are fun to tease.
+081: Sylvester is a cat.
+082: Fido is a dog.
+083: Dexter is a boy.
+084: I like dogs, but I am not particularly fond of cats.
+085: Cats are fun to tease.
+086: Sylvester is a cat.
+087: Fido is a dog.
+088: Dexter is a boy.
+089: I like dogs, but I am not particularly fond of cats.
+090: Cats are fun to tease.
+091: Sylvester is a cat.
+092: Fido is a dog.
+093: Dexter is a boy.
+094: I like dogs, but I am not particularly fond of cats.
+095: Cats are fun to tease.
+096: Sylvester is a cat.
+097: Fido is a dog.
+098: Dexter is a boy.
+099: I like dogs, but I am not particularly fond of cats.
+100: Cats are fun to tease.
+101: Sylvester is a cat.
+102: Fido is a dog.
+103: Dexter is a boy.
+104: I like dogs, but I am not particularly fond of cats.
+105: Cats are fun to tease.
+106: Sylvester is a cat.
+107: Fido is a dog.
+108: Dexter is a boy.
+109: I like dogs, but I am not particularly fond of cats.
+110: Cats are fun to tease.
+111: Sylvester is a cat.
+112: Fido is a dog.
+113: Dexter is a boy.
+114: I like dogs, but I am not particularly fond of cats.
+115: Cats are fun to tease.
+116: Sylvester is a cat.
+117: Fido is a dog.
+118: Dexter is a boy.
+119: I like dogs, but I am not particularly fond of cats.
+120: Cats are fun to tease.
+121: Sylvester is a cat.
+122: Fido is a dog.
+123: Dexter is a boy.
+124: I like dogs, but I am not particularly fond of cats.
+125: Cats are fun to tease.
+126: Sylvester is a cat.
+127: Fido is a dog.
+128: Dexter is a boy.
+129: I like dogs, but I am not particularly fond of cats.
+130: Cats are fun to tease.
+131: Sylvester is a cat.
+132: Fido is a dog.
+133: Dexter is a boy.
+134: I like dogs, but I am not particularly fond of cats.
+135: Cats are fun to tease.
+136: Sylvester is a cat.
+137: Fido is a dog.
+138: Dexter is a boy.
+139: I like dogs, but I am not particularly fond of cats.
+140: Cats are fun to tease.
+141: Sylvester is a cat.
+142: Fido is a dog.
+143: Dexter is a boy.
+144: I like dogs, but I am not particularly fond of cats.
+145: Cats are fun to tease.
+146: Sylvester is a cat.
+147: Fido is a dog.
+148: Dexter is a boy.
+149: I like dogs, but I am not particularly fond of cats.
+150: Cats are fun to tease.
+151: Sylvester is a cat.
+152: Fido is a dog.
+153: Dexter is a boy.
+154: I like dogs, but I am not particularly fond of cats.
+155: Cats are fun to tease.
+156: Sylvester is a cat.
+157: Fido is a dog.
+158: Dexter is a boy.
+159: I like dogs, but I am not particularly fond of cats.
+160: Cats are fun to tease.
+161: Sylvester is a cat.
+162: Fido is a dog.
+163: Dexter is a boy.
+164: I like dogs, but I am not particularly fond of cats.
+165: Cats are fun to tease.
+166: Sylvester is a cat.
+167: Fido is a dog.
+168: Dexter is a boy.
+169: I like dogs, but I am not particularly fond of cats.
+170: Cats are fun to tease.
+171: Sylvester is a cat.
+172: Fido is a dog.
+173: Dexter is a boy.
+174: I like dogs, but I am not particularly fond of cats.
+175: Cats are fun to tease.
+176: Sylvester is a cat.
+177: Fido is a dog.
+178: Dexter is a boy.
+179: I like dogs, but I am not particularly fond of cats.
+180: Cats are fun to tease.
+181: Sylvester is a cat.
+182: Fido is a dog.
+183: Dexter is a boy.
+184: I like dogs, but I am not particularly fond of cats.
+185: Cats are fun to tease.
+186: Sylvester is a cat.
+187: Fido is a dog.
+188: Dexter is a boy.
+189: I like dogs, but I am not particularly fond of cats.
+190: Cats are fun to tease.
+191: Sylvester is a cat.
+192: Fido is a dog.
+193: Dexter is a boy.
+194: I like dogs, but I am not particularly fond of cats.
+195: Cats are fun to tease.
+196: Sylvester is a cat.
+197: Fido is a dog.
+198: Dexter is a boy.
+199: I like dogs, but I am not particularly fond of cats.
+200: Cats are fun to tease.
+201: Sylvester is a cat.
+202: Fido is a dog.
+203: Dexter is a boy.
+204: I like dogs, but I am not particularly fond of cats.
+205: Cats are fun to tease.
+206: Sylvester is a cat.
+207: Fido is a dog.
+208: Dexter is a boy.
+209: I like dogs, but I am not particularly fond of cats.
+210: Cats are fun to tease.
+211: Sylvester is a cat.
+212: Fido is a dog.
+213: Dexter is a boy.
+214: I like dogs, but I am not particularly fond of cats.
+215: Cats are fun to tease.
+216: Sylvester is a cat.
+217: Fido is a dog.
+218: Dexter is a boy.
+219: I like dogs, but I am not particularly fond of cats.
+220: Cats are fun to tease.

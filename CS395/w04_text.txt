@@ -1,0 +1,39 @@
+
+/*
+Gaussian Elimination
+
+Implement the following algorithm for using Gaussian elimination to solve a system of linear equations.
+
+GE(A[0..n-1]) {
+   // Input: Array of A[0,,n-1]) of integers given as command line arguements
+   // Output: Array of floats of resolved system
+   //
+   // The first parameter will define how many equations there will be(n).
+   // The paramters following it will be the eleemtns of an n (virtical dimention)
+   // by n+1 (horizontal dimention) matrix.
+   // For example:
+   // ./myprog 3 1 2 3 4 5 6 7 8 9 10 11 12
+   // Produces the matrix:
+   //  1  2  3  4
+   //  5  6  7  8
+   //  9 10 11 12
+   printMatrix(A, n);
+   for i<-0 to n-2 do
+   {
+      for j<-i+1 to n-1 do
+         tempji <- A[j,i]
+         for k<-i to n do
+            A[j,k] <- A[j,k] - (A[i,k] * tempji / A[i,i])
+      printMatrix(A, n);
+   }
+
+Note: in printMatrix, print each value to 2 decimal places followed by space:
+   printf("%.2f ", A[i][j]);
+
+Note: The prototype for your printMatix funciton might look something like this:
+   void printMatrix(int n, float A[n][n+1])
+
+Note 2: The martix should be of type float:
+   float Arr[n][n+1];
+
+*/

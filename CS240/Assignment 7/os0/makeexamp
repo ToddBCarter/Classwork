@@ -1,0 +1,23 @@
+[rinker@rinker os0]$ make clean
+/bin/rm -f os0main.o os0.o hardware0.o  os0run core 
+
+[rinker@rinker os0]$ make
+gcc  -c os0main.c
+gcc  -c os0.c
+gcc  -c hardware0.c
+gcc   os0main.o os0.o hardware0.o  -lm -o os0run
+
+[rinker@rinker os0]$ vi os0main.c
+
+[rinker@rinker os0]$ make
+gcc  -c os0main.c
+gcc   os0main.o os0.o hardware0.o  -lm -o os0run
+
+[rinker@rinker os0]$ vi os0main.h
+
+[rinker@rinker os0]$ make
+gcc  -c os0main.c
+gcc  -c os0.c
+gcc  -c hardware0.c
+gcc   os0main.o os0.o hardware0.o  -lm -o os0run
+

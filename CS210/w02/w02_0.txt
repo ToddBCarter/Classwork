@@ -1,0 +1,18 @@
+Lexer: Strings
+
+This assignmet builds off the previous one. In this assignemnt you are to 
+expand your previous code to recognize strigns in CCX.
+
+   Strings:
+      Strings in CCX are literals delimited by double-quotes ”like this”. The
+      double-quotes are part of the lexeme. When you print a lexeme that has
+      been classified as a string, you must print the double-quotes. You may
+      assume that your lexer will never encounter a string that is more than 256
+      characters long.
+      Be carefule. Strings "can containg spaces", be in the beginning, middle 
+      or end of a line, ......... and just to make it fun we will allow stings 
+      to come after another "like""this".
+      When a string is encountered, print it out like this: 
+String: "The string you found"
+
+Anything that is not a string should still be labeled as a token.
