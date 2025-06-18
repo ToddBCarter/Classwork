@@ -1,0 +1,4 @@
+﻿  main.cpp
+C:\Users\darkl\source\repos\121Assignment4\121Assignment4\main.cpp(29,10): warning C4129: 'F': unrecognized character escape sequence
+C:\Users\darkl\source\repos\121Assignment4\121Assignment4\fraction.h(70): warning C4715: 'fraction::set': not all control paths return a value
+  121Assignment4.vcxproj -> C:\Users\darkl\source\repos\121Assignment4\Debug\121Assignment4.exe

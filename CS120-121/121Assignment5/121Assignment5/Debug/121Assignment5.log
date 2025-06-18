@@ -1,0 +1,3 @@
+﻿  main.cpp
+C:\Users\darkl\source\repos\121Assignment5\121Assignment5\linked_list.h(67): warning C4715: 'node::finder': not all control paths return a value
+  121Assignment5.vcxproj -> C:\Users\darkl\source\repos\121Assignment5\Debug\121Assignment5.exe

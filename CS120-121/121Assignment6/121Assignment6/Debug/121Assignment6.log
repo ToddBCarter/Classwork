@@ -1,0 +1,5 @@
+﻿  main.cpp
+C:\Users\darkl\source\repos\121Assignment6\121Assignment6\node.h(76): warning C4715: 'node::finder': not all control paths return a value
+C:\Users\darkl\source\repos\121Assignment6\121Assignment6\linked_list.h(245): warning C4715: 'linked_list::remove': not all control paths return a value
+C:\Users\darkl\source\repos\121Assignment6\121Assignment6\linked_list.h(207): warning C4715: 'linked_list::insert': not all control paths return a value
+  121Assignment6.vcxproj -> C:\Users\darkl\source\repos\121Assignment6\Debug\121Assignment6.exe

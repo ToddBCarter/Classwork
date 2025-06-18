@@ -1,0 +1,4 @@
+﻿  main.cpp
+C:\Users\darkl\source\repos\121Assignment10\121Assignment10\main.cpp(19,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\darkl\source\repos\121Assignment10\121Assignment10\bintree.h(64): warning C4715: 'tree::print': not all control paths return a value
+  121Assignment10.vcxproj -> C:\Users\darkl\source\repos\121Assignment10\Debug\121Assignment10.exe

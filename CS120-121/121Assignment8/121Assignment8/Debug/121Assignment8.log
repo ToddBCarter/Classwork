@@ -1,0 +1,7 @@
+﻿  main.cpp
+C:\Users\darkl\source\repos\121Assignment8\121Assignment8\main.cpp(44,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\darkl\source\repos\121Assignment8\121Assignment8\node.h(86): warning C4715: 'node::finder': not all control paths return a value
+C:\Users\darkl\source\repos\121Assignment8\121Assignment8\node.h(120): warning C4715: 'node::inserter': not all control paths return a value
+C:\Users\darkl\source\repos\121Assignment8\121Assignment8\linked_list.h(191): warning C4715: 'linked_list::remove': not all control paths return a value
+C:\Users\darkl\source\repos\121Assignment8\121Assignment8\linked_list.h(156): warning C4715: 'linked_list::insert': not all control paths return a value
+  121Assignment8.vcxproj -> C:\Users\darkl\source\repos\121Assignment8\Debug\121Assignment8.exe

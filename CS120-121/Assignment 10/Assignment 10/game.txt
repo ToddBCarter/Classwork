@@ -1,0 +1,15 @@
+   1  11  0 o Your first mate forged some papers that let you take the Suez Canal.  Nice.  Go forward 11.
+   2  0   1 - A Naval destroyer flashes red and blue!  The fuzz is closing in!
+   3  1   0 o Your mechanic did something that made you go faster!  You gain ground!
+   4  0   0 - Some of the crew formed a Lord of the Flies colony in the bilges.  You just left them to it.
+   5 -3   1 - A sudden storm hits hard!  Go back 3! 
+   6  0   0 - You spot some dolphins!  Maybe they're lucky?
+   7 -3   1 - Mutiny.  Back 3.  After all you've done for those ungrateful wretches.
+   8  0   2 - An aircraft carrier peels out of a doughnut shop!  Their F-35s barely miss the PIT manuever!
+   9 -7   1 - Pirate attack!  Emergency repairs set you back 7!
+  10  0   0 - The crew landed some fresh fish!  Morale boost!
+  11  3   0 o Fair weather sailing.  Calm seas let you drive ahead by 3.
+  12  0   1 - A friendly port provides you fuel!
+  13 -11  2 - You tried to drift the Suez Canal, and, well...  At least they got you unstuck eventually.
+  14  2   0 o The crew gives a mighty final push!  Onward to victory!
+  15 -15  3 - Your engines explode.  Your mechanic refuses to speak to you for a long time.  Back to start.

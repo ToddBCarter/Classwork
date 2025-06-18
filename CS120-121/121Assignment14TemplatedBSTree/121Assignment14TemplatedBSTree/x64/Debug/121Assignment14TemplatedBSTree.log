@@ -1,0 +1,3 @@
+﻿  main.cpp
+C:\Users\darkl\source\repos\121Assignment14TemplatedBSTree\121Assignment14TemplatedBSTree\main.cpp(36,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  121Assignment14TemplatedBSTree.vcxproj -> C:\Users\darkl\source\repos\121Assignment14TemplatedBSTree\x64\Debug\121Assignment14TemplatedBSTree.exe

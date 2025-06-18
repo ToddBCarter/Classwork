@@ -1,0 +1,4 @@
+﻿  main.cpp
+C:\Users\darkl\source\repos\121Assignment13BTVisits\121Assignment13BTVisits\main.cpp(232,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\darkl\source\repos\121Assignment13BTVisits\121Assignment13BTVisits\main.cpp(249,20): warning C4018: '<': signed/unsigned mismatch
+  121Assignment13BTVisits.vcxproj -> C:\Users\darkl\source\repos\121Assignment13BTVisits\Debug\121Assignment13BTVisits.exe
