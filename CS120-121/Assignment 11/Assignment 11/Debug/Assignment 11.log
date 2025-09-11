@@ -1,0 +1,4 @@
+﻿  Assignment 11.cpp
+C:\Users\darkl\source\repos\Assignment 11\Assignment 11\Assignment 11.cpp(359): warning C4715: 'squid_collateral': not all control paths return a value
+C:\Users\darkl\source\repos\Assignment 11\Assignment 11\Assignment 11.cpp(398): warning C4715: 'squid_square::squid_shoot': not all control paths return a value
+  Assignment 11.vcxproj -> C:\Users\darkl\source\repos\Assignment 11\Debug\Assignment 11.exe

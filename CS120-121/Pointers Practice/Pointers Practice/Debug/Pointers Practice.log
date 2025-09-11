@@ -1,0 +1,7 @@
+﻿  Source.cpp
+C:\Users\darkl\source\repos\Pointers Practice\Pointers Practice\Source.cpp(24,6): warning C4101: 'a': unreferenced local variable
+C:\Users\darkl\source\repos\Pointers Practice\Pointers Practice\Source.cpp(24,9): warning C4101: 'b': unreferenced local variable
+C:\Users\darkl\source\repos\Pointers Practice\Pointers Practice\Source.cpp(23,7): warning C4101: 'pData': unreferenced local variable
+C:\Users\darkl\source\repos\Pointers Practice\Pointers Practice\Source.cpp(24,12): warning C4101: 'c': unreferenced local variable
+C:\Users\darkl\source\repos\Pointers Practice\Pointers Practice\Source.cpp(24,15): warning C4101: 'd': unreferenced local variable
+  Pointers Practice.vcxproj -> C:\Users\darkl\source\repos\Pointers Practice\Debug\Pointers Practice.exe

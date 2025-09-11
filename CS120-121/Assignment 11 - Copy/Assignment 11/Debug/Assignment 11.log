@@ -1,0 +1,6 @@
+﻿  Source.cpp
+C:\Users\darkl\source\repos\Assignment 11\Assignment 11\Source.cpp(467,11): warning C4552: '-': result of expression not used
+C:\Users\darkl\source\repos\Assignment 11\Assignment 11\Source.cpp(33,32): warning C4101: 'sq_chk': unreferenced local variable
+C:\Users\darkl\source\repos\Assignment 11\Assignment 11\Source.cpp(497,9): warning C4553: '==': result of expression not used; did you intend '='?
+C:\Users\darkl\source\repos\Assignment 11\Assignment 11\Source.cpp(519): warning C4715: 'squid_square::squid_shoot': not all control paths return a value
+  Assignment 11.vcxproj -> C:\Users\darkl\source\repos\Assignment 11\Debug\Assignment 11.exe

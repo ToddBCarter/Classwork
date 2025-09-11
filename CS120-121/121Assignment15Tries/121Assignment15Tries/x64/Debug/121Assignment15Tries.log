@@ -1,0 +1,3 @@
+﻿  main.cpp
+C:\Users\darkl\source\repos\121Assignment15Tries\121Assignment15Tries\triesnode.h(38,34): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  121Assignment15Tries.vcxproj -> C:\Users\darkl\source\repos\121Assignment15Tries\x64\Debug\121Assignment15Tries.exe
