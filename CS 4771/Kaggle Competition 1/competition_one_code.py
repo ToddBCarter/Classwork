@@ -11,12 +11,12 @@ import pandas as pd
 import numpy as np
 
 from sklearn.datasets import make_regression
-from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import PolynomialFeatures
 
-train = pd.read_csv("train.csv")
-test = pd.read_csv("test.csv")
-sample = pd.read_csv("sample_submission.csv")
+train = pd.read_csv("/kaggle/input/assignment-files/train.csv")
+test = pd.read_csv("/kaggle/input/assignment-files/test.csv")
+sample = pd.read_csv("/kaggle/input/assignment-files/sample_submission.csv")
 
 #Print headers just to see:
 print(train.head())
@@ -48,12 +48,17 @@ print(train.head())
 print(train.info())
 print(sample.head())
 
+interaction = PolynomialFeatures(
+    degree=2, include_bias=False, interaction_only=True)
+X_polynomial = interaction.fit_transform(X)
+X_test_polynomial = interaction.fit_transform(X_test)
+
 #Produce the model:
 model = LinearRegression()
 
-model.fit(X, y)
+model.fit(X_polynomial, y)
 
-preds = model.predict(X_test)
+preds = model.predict(X_test_polynomial)
 
 #Produce the submission:
 submission = sample.copy()
